@@ -6,9 +6,11 @@
 
 ini_set("log_errors", 1);
 ini_set("error_log", "/tmp/php-errorv.log");
+error_log( "Hello, errors video!" );
 $uacheck = preg_match_all("/Version\/[0-9]\.[0-9]\sChrome\S*\sMobile|;\swv|\sAppleWebKit\/[0-9]*\.[0-9]*\s[(]KHTML,\slike\sGecko[)]\sVersion\/[0-9]\.[0-9]\s/", $_SERVER['HTTP_USER_AGENT']);
-$output = "";
-$keys = file_get_contents("http://api.daniil.it/?p=allwebsites");
+error_log($uacheck);
+
+$keys = file_get_contents("https://api.daniil.it/?p=allwebsites");
 $keys = preg_replace('/\n/', ', ', $keys);
 
 if(isset($_GET['url'])) {
@@ -17,7 +19,7 @@ if(isset($_GET['url'])) {
     } else {
         $mail = $_GET["url"];
         $url = urlencode($_GET["url"]);
-        $response = file_get_contents("http://api.daniil.it/?url=$url");
+        $response = file_get_contents("https://api.daniil.it/?url=$url");
         if($response != "") {
             $readyformats = '<h2>';
             $formats = preg_replace('/^.+\n/', '', $response);
@@ -202,8 +204,7 @@ if(isset($_GET['url'])) {
                         <span class="name">Download videos!</span>
 
                         <hr class="star-light">
-                        <span class="skills giallo" id="description">Download videos from <a href="http://youtube.com" target="_blank">YouTube</a>, <a href="http://rai.tv" target="_blank">Rai</a>, <a href="http://www.rai.tv/dl/replaytv/replaytv.html#" target="_blank">Rai Replay</a>, <a href="http://video.mediaset.it" target="_blank">Video Mediaset</a>, <a href="http://la7.it" target="_blank">La7</a>, <a href="http://wittytv.it" target="_blank">Witty TV</a>, <a href="http://dplay.com" target="_blank">Dplay</a> <a href="#support" class="portfolio-link"  data-toggle="modal">and lots of other websites</a>!<br>
-Paste the URL of the video:<BR></span>
+                        <span class="skills giallo" id="description">Download videos from <a href="http://youtube.com" target="_blank">YouTube</a>, <a href="http://rai.tv" target="_blank">Rai</a>, <a href="http://www.rai.tv/dl/replaytv/replaytv.html#" target="_blank">Rai Replay</a>, <a href="http://video.mediaset.it" target="_blank">Video Mediaset</a>, <a href="http://la7.it" target="_blank">La7</a>, <a href="http://wittytv.it" target="_blank">Witty TV</a>, <a href="http://dplay.com" target="_blank">Dplay</a> <a href="#support" class="portfolio-link"  data-toggle="modal">and lots of other websites</a>!<br>Paste the URL of the video:<BR></span>
 
                         <br>
                         <br>
@@ -213,7 +214,7 @@ Paste the URL of the video:<BR></span>
                         </form>
                         <div style="display:none" id="js">
                             <input onchange='video_dl("#result", $("input#urljs").val(), "<?= $uacheck ?>", "#message");' type="text" class="form-control" placeholder="URL of the video" id="urljs" required data-validation-required-message="Please enter a URL.">
-                            <button type="submit" class="btn btn-success btn-lg">Download the video!</button>
+                            <button onclick='video_dl("#result", $("input#urljs").val(), "<?= $uacheck ?>", "#message");' type="submit" class="btn btn-success btn-lg">Download the video!</button>
                             <p class="help-block text-danger"></p>
                         </div>
                         <div id="result"><?= $output ?></div>
@@ -234,7 +235,6 @@ Paste the URL of the video:<BR></span>
                             (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
                         <span class="skills giallo" id="incorporation">You can incorporate this video download script in your website! Just follow <A href="//daniil.it/video-dl#incorporation" target="_blank">these instructions! </A></span>
-                        <span class="skills giallo"><br>Component statuses: <a href="https://status.daniil.it"><img src="//status.daniil.it/component/12/shield" class="img-centered img-responsive"><img src="//status.daniil.it/component/16/shield" class="img-centered img-responsive"><img src="//status.daniil.it/component/19/shield" class="img-centered img-responsive"><img src="//status.daniil.it/component/15/shield" class="img-centered img-responsive"></a></span>
                     </div>
                 </div>
             </div>
@@ -280,9 +280,8 @@ Paste the URL of the video:<BR></span>
                         <h3>Other versions</h3>
                         <p><a href="http://daniil.it/video-dl/#method-1-app" target="_blank">Android version</a>
                             <br><a href="http://daniil.it/video-dl/" target="_blank">Bash script version</a>
-                            <br><a href="http://telegram.me/video_dl_bot" target="_blank">Telegram bot</a>
                             <br>
-                        </p><p id="jsd" style="display:none">Currently using the Jquery engine.</p><p id="phpd">Currently using the PHP engine.</p>
+                        </p><p id="jsd" style="display:none">Currently using the Jquery engine.</p><p id="phpd">Currently using the Php engine.</p>
                     </div>
                 </div>
             </div>
@@ -321,7 +320,6 @@ Paste the URL of the video:<BR></span>
             </div>
         </div>
     </div>
-    
     <div class="portfolio-modal modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="contact">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
