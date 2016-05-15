@@ -6,11 +6,12 @@
 
 ini_set("log_errors", 1);
 ini_set("error_log", "/tmp/php-error_api.log");
-error_log( "Hello, errors (api)!" );
 
-if(($_GET['p']) == 'websites') {
+
+if(isset($_GET['p'])) $param = $_GET['p']; else $param = "";
+if($param == 'websites') {
     echo "Rai, Mediaset, Witty TV, LA7, DPLAY, Deejay TV, Eurosport, WAT and all of the websites supported by youtube-dl.";
-} elseif(($_GET['p']) == 'allwebsites') {
+} elseif($param == 'allwebsites') {
     $yt = shell_exec('youtube-dl --list-extractors');
     echo "rai.it
 video.mediaset.it
@@ -65,13 +66,11 @@ $yt";
 */
      $dir = __DIR__;
      $url = $_GET["url"];
-     $param = $_GET["p"];
-     $db = $_GET["nodb"];
+     if(isset($_GET['nodb'])) $db = $_GET["nodb"]; else $db = "";
      $cmd = "bash ".escapeshellarg($dir)."/api.sh ".escapeshellarg($url).' '.escapeshellarg($param).' '.escapeshellarg($db);
      $message = shell_exec("$cmd");
      $final = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $message); 
      $final = trim($final, "\n");
-     error_log("final is $final");
      if($final != "") {
       echo $final;
      } else {
