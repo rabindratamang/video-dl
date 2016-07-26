@@ -230,7 +230,7 @@ $u"
  rai() { 
   saferai="$1"
   # Store the page in a variable
-  file=$(wget "$saferai" -q -O -)
+  file=$(wget "$saferai" -qQ 50000000 -O -)
 
   # Rai replay or normal rai website choice
   echo "$1" | grep -q 'http://www.*.rai..*/dl/replaytv/replaytv.html.*' && replay "$saferai" || rai_normal "$saferai"
@@ -255,7 +255,7 @@ $u"
    json=$(curl -s $jsons)
   } || {
    # iframe check
-   echo "$file" | grep -q videoURL || { urls="http://www.rai.it/dl/RaiTV/programmi/media/"$(echo "$file" | sed '/content="ContentItem/!d;s/.*content="//g;s/".*//g')".html http://www.rai.tv$(echo "$file" | grep -A1 '<div id="idFramePlayer">' | sed '/\<iframe/!d;s/.*src="//g;s/?.*//g') $(echo "$file" | sed '/drawMediaRaiTV/!d;s/.*http/http/g;s/'"'"'.*//g')"; file="$(wget -qO- $urls)"; }
+   echo "$file" | grep -q videoURL || { urls="http://www.rai.it/dl/RaiTV/programmi/media/"$(echo "$file" | sed '/content="ContentItem/!d;s/.*content="//g;s/".*//g')".html http://www.rai.tv$(echo "$file" | grep -A1 '<div id="idFramePlayer">' | sed '/\<iframe/!d;s/.*src="//g;s/?.*//g') $(echo "$file" | sed '/drawMediaRaiTV/!d;s/.*http/http/g;s/'"'"'.*//g')"; file="$(wget -Q 50000000 -qO- $urls)"; }
   }
   # read and declare videoURL and videoTitolo variables from javascript in page
 
@@ -392,7 +392,7 @@ ${base//$t\.mp4/$i\.mp4}"; tbase="$(echo "$tbase" | grep -Ev "_([0-9]{3,4})_([0-
 
  lasette() {
   # Store the page in a variable
-  page="$(wget "$1" -q -O -)"
+  page="$(wget "$1" -Q 50000000 -q -O -)"
 
   # Get the javascript with the URLs
   unformatted="$(wget -q -O - $(echo "$page" | sed '/starter/!d;s/.*src\=\"//;s/\".*//') | sed '/src:.*\|src_.*/!d;s/.*\: \"//;s/\".*//')"
@@ -413,7 +413,7 @@ ${base//$t\.mp4/$i\.mp4}"; tbase="$(echo "$tbase" | grep -Ev "_([0-9]{3,4})_([0-
 
  mediaset() {
   # Store the page in a variable
-  page=$(wget "$1" -q -O -)
+  page=$(wget "$1" -Q 50000000 -q -O -)
 
   # Witty tv recongition
   [ "$witty" = "y" ] && {
@@ -495,7 +495,7 @@ ${base//$t\.mp4/$i\.mp4}"; tbase="$(echo "$tbase" | grep -Ev "_([0-9]{3,4})_([0-
 
  common() {
   # Store the page in a variable
-  page="$(wget -q -O - "$1")"
+  page="$(wget -Q 50000000 -q -O - "$1")"
 
   json="$(youtube-dl -J "$1" | ./JSON.sh -s)"
   videoTitolo=$(echo "$json" | sed '/\["title"\]/!d;s/.*\t"//g;s/".*//g')
