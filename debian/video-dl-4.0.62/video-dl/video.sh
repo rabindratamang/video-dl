@@ -1,5 +1,5 @@
 #!/bin/bash
-# Video download script v4.0.57
+# Video download script v4.0.62
 # Created by Daniil Gentili (http://daniil.it)
 # Video-dl - Video download programs
 #
@@ -28,7 +28,7 @@
 # v3.3.1 Improved the auto update function and player choice
 # v3.3.2 Squashed some other bugs, fixed download of 302 videos on Mac OS X (curl redirection).
 
-echo "Video download script v4.0.57
+echo "Video download script v4.0.62
 Copyright (C) 2016 Daniil Gentili
 This program comes with ABSOLUTELY NO WARRANTY.
 This is free software, and you are welcome to redistribute it under certain conditions; see https://github.com/danog/video-dl/raw/master/LICENSE."
@@ -341,7 +341,7 @@ $u"
  rai() { 
   saferai="$1"
   # Store the page in a variable
-  file=$(wget "$saferai" -q -O -)
+  file=$(wget "$saferai" -qQ 50000000 -O -)
 
   # Rai replay or normal rai website choice
   echo "$1" | grep -q 'http://www.*.rai..*/dl/replaytv/replaytv.html.*' && replay "$saferai" || rai_normal "$saferai"
@@ -366,7 +366,7 @@ $u"
    json=$(curl -s $jsons)
   } || {
    # iframe check
-   echo "$file" | grep -q videoURL || { urls="http://www.rai.it/dl/RaiTV/programmi/media/"$(echo "$file" | sed '/content="ContentItem/!d;s/.*content="//g;s/".*//g')".html http://www.rai.tv$(echo "$file" | grep -A1 '<div id="idFramePlayer">' | sed '/\<iframe/!d;s/.*src="//g;s/?.*//g') $(echo "$file" | sed '/drawMediaRaiTV/!d;s/.*http/http/g;s/'"'"'.*//g')"; file="$(wget -qO- $urls)"; }
+   echo "$file" | grep -q videoURL || { urls="http://www.rai.it/dl/RaiTV/programmi/media/"$(echo "$file" | sed '/content="ContentItem/!d;s/.*content="//g;s/".*//g')".html http://www.rai.tv$(echo "$file" | grep -A1 '<div id="idFramePlayer">' | sed '/\<iframe/!d;s/.*src="//g;s/?.*//g') $(echo "$file" | sed '/drawMediaRaiTV/!d;s/.*http/http/g;s/'"'"'.*//g')"; file="$(wget -Q 50000000 -qO- $urls)"; }
   }
   # read and declare videoURL and videoTitolo variables from javascript in page
 
@@ -503,7 +503,7 @@ ${base//$t\.mp4/$i\.mp4}"; tbase="$(echo "$tbase" | grep -Ev "_([0-9]{3,4})_([0-
 
  lasette() {
   # Store the page in a variable
-  page="$(wget "$1" -q -O -)"
+  page="$(wget "$1" -Q 50000000 -q -O -)"
 
   # Get the javascript with the URLs
   unformatted="$(wget -q -O - $(echo "$page" | sed '/starter/!d;s/.*src\=\"//;s/\".*//') | sed '/src:.*\|src_.*/!d;s/.*\: \"//;s/\".*//')"
@@ -524,7 +524,7 @@ ${base//$t\.mp4/$i\.mp4}"; tbase="$(echo "$tbase" | grep -Ev "_([0-9]{3,4})_([0-
 
  mediaset() {
   # Store the page in a variable
-  page=$(wget "$1" -q -O -)
+  page=$(wget "$1" -Q 50000000 -q -O -)
 
   # Witty tv recongition
   [ "$witty" = "y" ] && {

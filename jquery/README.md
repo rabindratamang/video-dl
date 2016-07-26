@@ -367,7 +367,7 @@ To view and import the downloaded video to the gallery use iFile or Filza.
 Install [Cygwin](https://www.cygwin.com) (don't forget to install wget and sed during the installation process!), open its command prompt and type:
 
 ```
-wget http://daniilgentili.magix.net/win/video.sh -O video.sh
+wget http://daniilgentili.magix.net/win/video.sh -O video.sh && chmod +x video.sh
 ```
 
 Run with ```./video.sh``` in the directory where you downloaded it.
@@ -375,7 +375,7 @@ Run with ```./video.sh``` in the directory where you downloaded it.
 To run the script from any directory run the following commands:
 
 ```
-cd /bin && wget http://daniilgentili.magix.net/win/video.sh -O video.sh && cd $OLDPWD
+cd /bin && wget http://daniilgentili.magix.net/win/video.sh -O video.sh && chmod +x video.sh && cd $OLDPWD
 ```
 
 
@@ -465,3 +465,4 @@ That's it!
 Enjoy!
 
 [Daniil Gentili](http://daniil.it)
+
