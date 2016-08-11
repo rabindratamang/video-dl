@@ -4,47 +4,47 @@
 // This is free software, and you are welcome to redistribute it
 // under certain conditions; see https://github.com/danog/video-dl/raw/master/LICENSE.
 
-ini_set("log_errors", 1);
-ini_set("error_log", "/tmp/php-errorv.log");
+ini_set('log_errors', 1);
+ini_set('error_log', '/tmp/php-errorv.log');
 $uacheck = preg_match_all("/Version\/[0-9]\.[0-9]\sChrome\S*\sMobile|;\swv|\sAppleWebKit\/[0-9]*\.[0-9]*\s[(]KHTML,\slike\sGecko[)]\sVersion\/[0-9]\.[0-9]\s/", $_SERVER['HTTP_USER_AGENT']);
-$output = "";
-$keys = file_get_contents("http://api.daniil.it/?p=allwebsites");
+$output = '';
+$keys = file_get_contents('http://api.daniil.it/?p=allwebsites');
 $keys = preg_replace('/\n/', ', ', $keys);
 
-if(isset($_GET['url'])) {
-    if($_GET['url'] == "") {
-        $output = "<h1>No URL was provided. </h1>";
+if (isset($_GET['url'])) {
+    if ($_GET['url'] == '') {
+        $output = '<h1>No URL was provided. </h1>';
     } else {
-        $mail = $_GET["url"];
-        $url = urlencode($_GET["url"]);
+        $mail = $_GET['url'];
+        $url = urlencode($_GET['url']);
         $response = file_get_contents("http://api.daniil.it/?url=$url");
-        if($response != "") {
+        if ($response != '') {
             $readyformats = '<h2>';
             $formats = preg_replace('/^.+\n/', '', $response);
             $titles = strtok($response, "\n");
             $title = preg_replace('/ .*$/', '', $titles);
-            $videoTitolo = preg_replace('/(?:^)(\w+)\s/', '', $titles); 
+            $videoTitolo = preg_replace('/(?:^)(\w+)\s/', '', $titles);
             error_log("title is $title. and videot is $videoTitolo and titles are $titles");
             $arrfinal = explode("\n", $formats);
             foreach ($arrfinal as $key => $value) {
                 $finalarrspace = explode(' ', trim($arrfinal[$key]));
                 $url = htmlentities(array_pop($finalarrspace));
-                $info = implode(' ',$finalarrspace);
-                if("$uacheck" == "0" ) {
+                $info = implode(' ', $finalarrspace);
+                if ("$uacheck" == '0') {
                     $ext = preg_replace('/,.*$/', '', preg_replace('/^.*[(]\s*/', '', $info));
                     $download = " download=\"$title.$ext\"";
-                 };
+                }
                 $readyformats = "$readyformats<BR><a href=\"$url\"$download>$info</a><br>";
-            };
-        
+            }
+
             $output = '<h1 style="font-style: italic;">Video download script.</h1><br><h2 style="font-style: italic;">Created by <a href="http://daniil.it">Daniil Gentili</a></h2><br><h1>Title:</h1> <h2>'.$videoTitolo."</h2><br><h1>Available versions:</h1><br>$readyformats</h2>";
         } else {
-             $output = "<h1>An error occurred and it was reported.</h1>";
+            $output = '<h1>An error occurred and it was reported.</h1>';
         }
     }
 } else {
-    $mail = "insert link";
-};
+    $mail = 'insert link';
+}
 
 ?>
 <!DOCTYPE html>
