@@ -1,17 +1,22 @@
 <?php
+
 // Video download script, php version - Copyright (C) 2015 Daniil Gentili
 // This program comes with ABSOLUTELY NO WARRANTY.
 // This is free software, and you are welcome to redistribute it
 // under certain conditions; see https://github.com/danog/video-dl/raw/master/LICENSE.
 
-ini_set("log_errors", 1);
-ini_set("error_log", "/tmp/php-error_api.log");
+ini_set('log_errors', 1);
+ini_set('error_log', '/tmp/php-error_api.log');
 
 
-if(isset($_GET['p'])) $param = $_GET['p']; else $param = "";
-if($param == 'websites') {
-    echo "Rai, Mediaset, Witty TV, LA7, DPLAY, Deejay TV, Eurosport, WAT and all of the websites supported by youtube-dl.";
-} elseif($param == 'allwebsites') {
+if (isset($_GET['p'])) {
+    $param = $_GET['p'];
+} else {
+    $param = '';
+}
+if ($param == 'websites') {
+    echo 'Rai, Mediaset, Witty TV, LA7, DPLAY, Deejay TV, Eurosport, WAT and all of the websites supported by youtube-dl.';
+} elseif ($param == 'allwebsites') {
     $yt = shell_exec('youtube-dl --list-extractors');
     echo "rai.it
 video.mediaset.it
@@ -22,8 +27,8 @@ deejay.it
 wat.tv
 eurosport.com
 $yt";
-} elseif((isset($_GET['url']) && $_GET['url'] != "") || php_sapi_name() == "cli") {
-/*    $locale = 'it_IT.utf-8';
+} elseif ((isset($_GET['url']) && $_GET['url'] != '') || php_sapi_name() == 'cli') {
+    /*    $locale = 'it_IT.utf-8';
     setlocale(LC_ALL, $locale);
     putenv('LC_ALL='.$locale);
 
@@ -31,20 +36,20 @@ $yt";
     $pdo = new PDO("$db", "$user", "$pass");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    
-    
+
+
     $stmt = $pdo->prepare('SELECT final FROM video_db WHERE url  = :url');
     $stmt->bindParam(':url', $url, PDO::PARAM_STR);
     $stmt->execute();
     $final = $stmt->fetchColumn();
-    
+
     error_log("$final");
     if (empty($final) || "$final" == "") {
      $param = $_GET["p"];
      $db = $_GET["nodb"];
      $cmd = "bash /var/www/video/api/api.sh".' '.escapeshellarg($url).' '.escapeshellarg($param).' '.escapeshellarg($db);
      $message = shell_exec("$cmd");
-     $final = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $message); 
+     $final = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $message);
      $final = trim($final, "\n");
      if ($final != "") {
       echo "$final";
@@ -53,7 +58,7 @@ $yt";
      } else {
       $cmd = "bash -x /var/www/video/api/api.sh".' '.escapeshellarg($url).' '.escapeshellarg($param).' '.escapeshellarg($db)." 2>&1";
       $message = shell_exec("$cmd");
-      $error = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $message); 
+      $error = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $message);
       $error = trim($error, "\n");
       $to = 'daniil.gentili.dg@gmail.com';
       $headers = "From: noreply@daniil.it\n";
@@ -65,29 +70,33 @@ $yt";
     } else { echo "$final"; };
 */
      $dir = __DIR__;
-     $url = $_GET["url"];
-     if(isset($_GET['nodb'])) $db = $_GET["nodb"]; else $db = "";
-     $cmd = "bash ".escapeshellarg($dir)."/api.sh ".escapeshellarg($url).' '.escapeshellarg($param).' '.escapeshellarg($db);
-     $message = shell_exec("$cmd");
-     $final = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $message); 
-     $final = trim($final, "\n");
-     if($final != "") {
-      echo $final;
-     } else {
-      $cmdcheck = "bash ".escapeshellarg($dir)."/api.sh ".escapeshellarg($url).' check';
-      $message = shell_exec("$cmdcheck");
-      $error = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $message); 
-      $error = trim($error, "\n");
-      error_log("error is $error");
-      if($error != ""){
-       $to = 'daniil.gentili.dg@gmail.com';
-       $headers = "From: noreply@daniil.it\n";
-       $email_subject = "Video download error: $url";
-       $email_body = "An error occurred while downloading the following video: $url\nThis is the output of youtube-dl --verbose\n\n$error\n\n";
-       $headers .= "Reply-To: daniil.gentili@gmail.com";
-       mail($to,$email_subject,$email_body,$headers);
-      }
-     }
+    $url = $_GET['url'];
+    if (isset($_GET['nodb'])) {
+        $db = $_GET['nodb'];
+    } else {
+        $db = '';
+    }
+    $cmd = 'bash '.escapeshellarg($dir).'/api.sh '.escapeshellarg($url).' '.escapeshellarg($param).' '.escapeshellarg($db);
+    $message = shell_exec("$cmd");
+    $final = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $message);
+    $final = trim($final, "\n");
+    if ($final != '') {
+        echo $final;
+    } else {
+        $cmdcheck = 'bash '.escapeshellarg($dir).'/api.sh '.escapeshellarg($url).' check';
+        $message = shell_exec("$cmdcheck");
+        $error = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $message);
+        $error = trim($error, "\n");
+        error_log("error is $error");
+        if ($error != '') {
+            $to = 'daniil.gentili.dg@gmail.com';
+            $headers = "From: noreply@daniil.it\n";
+            $email_subject = "Video download error: $url";
+            $email_body = "An error occurred while downloading the following video: $url\nThis is the output of youtube-dl --verbose\n\n$error\n\n";
+            $headers .= 'Reply-To: daniil.gentili@gmail.com';
+            mail($to, $email_subject, $email_body, $headers);
+        }
+    }
 } else {
     echo '<!DOCTYPE HTML>
 <html>
@@ -129,4 +138,3 @@ $yt";
 </body>
 ';
 }
-?>
