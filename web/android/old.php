@@ -16,15 +16,15 @@
 
 
 <?php
-if(isset($_GET['url'])) {
+if (isset($_GET['url'])) {
     $file = __FILE__;
-    $url = ($_GET["url"]);
-    $quality = ($_GET["q"]);
-    $param = ($_GET["p"]);
-    if(!isset($_GET['q'])) {
+    $url = ($_GET['url']);
+    $quality = ($_GET['q']);
+    $param = ($_GET['p']);
+    if (!isset($_GET['q'])) {
         $quality = dontmindme;
-    };
-    $cmd =  "bash " .  escapeshellarg($file) .  ' ' . escapeshellarg($url) .  ' ' .  escapeshellarg($quality) .  ' ' . escapeshellarg($param);
+    }
+    $cmd = 'bash '.escapeshellarg($file).' '.escapeshellarg($url).' '.escapeshellarg($quality).' '.escapeshellarg($param);
     $message = shell_exec("$cmd");
     print_r($message);
 }
