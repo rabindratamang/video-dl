@@ -1,9 +1,14 @@
 <?php
-// Video download script, php version - Copyright (C) 2015 Daniil Gentili
-// This program comes with ABSOLUTELY NO WARRANTY.
-// This is free software, and you are welcome to redistribute it
-// under certain conditions; see https://github.com/danog/video-dl/raw/master/LICENSE.
-
+/*
+Copyright 2016 Daniil Gentili
+(https://daniil.it)
+This file is part of video-dl.
+video-dl is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+video-dl is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU Affero General Public License for more details.
+You should have received a copy of the GNU General Public License along with the video-dl.
+If not, see <http://www.gnu.org/licenses/>.
+*/
 ini_set('log_errors', 1);
 ini_set('error_log', '/tmp/php-errorv.log');
 $uacheck = preg_match_all("/Version\/[0-9]\.[0-9]\sChrome\S*\sMobile|;\swv|\sAppleWebKit\/[0-9]*\.[0-9]*\s[(]KHTML,\slike\sGecko[)]\sVersion\/[0-9]\.[0-9]\s/", $_SERVER['HTTP_USER_AGENT']);
@@ -202,7 +207,7 @@ if (isset($_GET['url'])) {
                         <span class="name">Download videos!</span>
 
                         <hr class="star-light">
-                        <span class="skills giallo" id="description">Download videos from <a href="http://youtube.com" target="_blank">YouTube</a>, <a href="http://rai.tv" target="_blank">Rai</a>, <a href="http://www.rai.tv/dl/replaytv/replaytv.html#" target="_blank">Rai Replay</a>, <a href="http://video.mediaset.it" target="_blank">Video Mediaset</a>, <a href="http://la7.it" target="_blank">La7</a>, <a href="http://wittytv.it" target="_blank">Witty TV</a>, <a href="http://dplay.com" target="_blank">Dplay</a> <a href="#support" class="portfolio-link" data-toggle="modal">and lots of other websites</a>!<br>
+                        <div class="skills giallo" id="description">Download videos from <a href="http://youtube.com" target="_blank">YouTube</a>, <a href="http://rai.tv" target="_blank">Rai</a>, <a href="http://www.rai.tv/dl/replaytv/replaytv.html#" target="_blank">Rai Replay</a>, <a href="http://video.mediaset.it" target="_blank">Video Mediaset</a>, <a href="http://la7.it" target="_blank">La7</a>, <a href="http://wittytv.it" target="_blank">Witty TV</a>, <a href="http://dplay.com" target="_blank">Dplay</a> <a href="#support" class="portfolio-link" data-toggle="modal">and lots of other websites</a>!<br>
                         Also, do check out my other projects: 
                         <ul>
                             <li><a href="https://pwrtelegram.xyz" target="_blank">pwrtelegram, a boosted version of the Telegram bot API</a></li>
@@ -211,7 +216,7 @@ if (isset($_GET['url'])) {
                             <li><a href="https://daniil.it/#bots" target="_blank">my telegram bots</a></li>
                             <li><a href="https://daniil.it" target="_blank">and many more!</a></li>
                         </ul>
-                        Paste the URL of the video:<BR></span>
+                        Paste the URL of the video:<BR></div>
 
                         <br>
                         <br>

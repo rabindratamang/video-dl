@@ -14,7 +14,7 @@ Programmi per scaricare video.
 Creato da [Daniil Gentili](http://daniil.it).
 
 
-This project is licensed under the terms of the GPLv3 license.
+This project is licensed under the terms of the AGPLv3 license.
 
 
 I programmi di questo progetto possono essere usati per scaricare i video di qualsiasi sito generico, inclusi i video del sito della [Rai](http://rai.tv) (incluso Rai Replay e siti iframe), [Mediaset](http://mediaset.it) (incluso Witty TV), [LA7](http://la7.it), [Dplay](http://dplay.com) e tanti altri siti. E grazie a youtube-dl adesso i programmi supportano tantissimi altri siti!
