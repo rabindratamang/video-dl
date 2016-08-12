@@ -1,0 +1,28 @@
+Format: 1.8
+Date: Fri, 12 Aug 2016 16:08:49 +0000
+Source: video-dl
+Binary: video-dl
+Architecture: source all
+Version: 4.0.69
+Distribution: lenny
+Urgency: low
+Maintainer: Daniil Gentili <daniil.gentili.dg@gmail.com>
+Changed-By: Daniil Gentili <daniil.gentili.dg@gmail.com>
+Description: 
+ video-dl   - Video Download script
+Changes: 
+ video-dl (4.0.69) lenny; urgency=low
+ .
+   * Removed caddyfile
+Checksums-Sha1: 
+ 90d894646bd764647d866c1d39de760a6f22b841 1443 video-dl_4.0.69.dsc
+ c895ac5a04ea170337f01c888b106511ccc38e28 19778 video-dl_4.0.69.tar.gz
+ c0e24792a88fa6db9a9c79cf65a7f4038725498a 23118 video-dl_4.0.69_all.deb
+Checksums-Sha256: 
+ 251d8790fb7dee69cfe3e9526e10624050d7b18cb42c0cab68b91ddb4c5422db 1443 video-dl_4.0.69.dsc
+ 15aad9cfb0ecb23f04e095ab41b3012fea56af442c67251510be81e4fc0b1d9c 19778 video-dl_4.0.69.tar.gz
+ a3567d961c3cb47d405a37f9eeb90b2330b8cd2e7e238bc9c38ef024c60b7699 23118 video-dl_4.0.69_all.deb
+Files: 
+ 7e15f5960c6e97c7053c23369ab3297f 1443 misc optional video-dl_4.0.69.dsc
+ f22ec8a59eabc80f45b30fee6ad37dad 19778 misc optional video-dl_4.0.69.tar.gz
+ bd3be323d4a9c76ac43fa3abb806b87e 23118 misc optional video-dl_4.0.69_all.deb
