@@ -63,7 +63,7 @@ hr.star-light {
 
 hr.star-light:after {
     color: #fff;
-    background-color: #B366FF;
+    background-color: #f6f;
 }
 
 hr.star-primary {
@@ -82,7 +82,7 @@ hr.star-primary:after {
 header {
     text-align: center;
     color: #fff;
-    background: #B366FF;
+    background: #f6f;
 }
 
 header .container {
@@ -353,7 +353,7 @@ footer .footer-col {
 
 footer .footer-below {
     padding: 25px 0;
-    background-color: #b366ff;
+    background-color: #FF66FF;
 }
 
 .btn-social {
@@ -463,7 +463,7 @@ a {
 }
 
 .inverted a {
-    color: #b366ff;
+    color: #FF66FF;
 }
 .inverted a:hover,
 .inverted a:focus,
