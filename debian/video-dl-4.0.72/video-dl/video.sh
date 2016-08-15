@@ -1,14 +1,12 @@
 #!/bin/bash
-# Video download script v4.0.69
+# Video download script v4.0.72
 # Created by Daniil Gentili (http://daniil.it)
 # Video-dl - Video download programs
 #
 # Copyright 2016 Daniil Gentili (https://daniil.it)
 # This file is part of video-dl.
-# video-dl is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as 
-published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-# video-dl is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of 
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# video-dl is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+# video-dl is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 # See the GNU Affero General Public License for more details.
 # You should have received a copy of the GNU General Public License along with the video-dl.
 # If not, see <http://www.gnu.org/licenses/>.
@@ -23,7 +21,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 # v3.3.1 Improved the auto update function and player choice
 # v3.3.2 Squashed some other bugs, fixed download of 302 videos on Mac OS X (curl redirection).
 
-echo "Video download script v4.0.69
+echo "Video download script v4.0.72
 Copyright (C) 2016 Daniil Gentili
 This program comes with ABSOLUTELY NO WARRANTY.
 This is free software, and you are welcome to redistribute it under certain conditions; see https://github.com/danog/video-dl/raw/master/LICENSE."
