@@ -1,0 +1,2 @@
+api.sh: riga 338: errore di sintassi vicino al token non atteso "("
+api.sh: riga 338: `  for f in $(echo $* | awk '{ while(++i<=NF) printf (!a[$i]++) ? $i FS : ""; i=split("",a); print "" }'); do'
