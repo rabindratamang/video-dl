@@ -1,5 +1,5 @@
 #!/bin/bash
-# Video download script v4.0.72
+# Video download script v4.0.74
 # Created by Daniil Gentili (http://daniil.it)
 # Video-dl - Video download programs
 #
@@ -21,7 +21,7 @@
 # v3.3.1 Improved the auto update function and player choice
 # v3.3.2 Squashed some other bugs, fixed download of 302 videos on Mac OS X (curl redirection).
 
-echo "Video download script v4.0.72
+echo "Video download script v4.0.74
 Copyright (C) 2016 Daniil Gentili
 This program comes with ABSOLUTELY NO WARRANTY.
 This is free software, and you are welcome to redistribute it under certain conditions; see https://github.com/danog/video-dl/raw/master/LICENSE."
@@ -128,7 +128,7 @@ api() {
  urltype="$(curl -w "%{url_effective}\n" -L -s -I -S "$dl" -o /dev/null | sed 's/^HTTP:\/\//http:\/\//g')"
  
  
- echo "$urltype" | grep -qE '.*rai.it/.*|.*rai.tv/.*|.*rainews.it/.*'  && ptype=rai
+ echo "$urltype" | grep -qE '.*rai.it/.*|.*rai.tv/.*|.*rainews.it/.*|.*raiplay.it/.*'  && ptype=rai
 # grep -qE 'http://www.*.rai..*/dl/RaiTV/programmi/media/.*|http://www.*.rai..*/dl/RaiTV/tematiche/.*|http://www.*.rai..*/ dl/.*PublishingBlock-.*|http://www.*.rai..*/dl/replaytv/replaytv.html.*|http://.*.rai.it/.*|http://www.rainews.it/dl/rainews/.*|https://www.*.rai..*/dl/ RaiTV/programmi/media/.*|https://www.*.rai..*/dl/RaiTV/tematiche/.*|https://www.*.rai..*/dl/.*PublishingBlock-.*|https://www.*.rai..*/dl/ replaytv/replaytv.html.*|https://.*.rai.it/.*|https://www.rainews.it/dl/rainews/.*' && ptype=rai
  
  
@@ -337,6 +337,8 @@ $u"
   file=$(wget "$saferai" -qQ 50000000 -O -)
 
   # Rai replay or normal rai website choice
+  links="$(echo "$links" | sed '/^\s*$/d')"
+  [ "$links" = "" ] && raiplay "$saferai"
   echo "$1" | grep -q 'http://www.*.rai..*/dl/replaytv/replaytv.html.*' && replay "$saferai" || rai_normal "$saferai"
   links="$videoURL_M3U8 $videoURL_MP4 $videoURL_H264 $videoURL_WMV $videoURL $replay"
   links="$(echo "$links" | sed '/^\s*$/d')"
@@ -358,8 +360,12 @@ $u"
    jsons=$(echo "$file" | sed '/"url" : "http/!d;s/.* : "//;s/".*//')
    json=$(curl -s $jsons)
   } || {
+   
    # iframe check
-   echo "$file" | grep -q videoURL || { urls="http://www.rai.it/dl/RaiTV/programmi/media/"$(echo "$file" | sed '/content="ContentItem/!d;s/.*content="//g;s/".*//g')".html http://www.rai.tv$(echo "$file" | grep -A1 '<div id="idFramePlayer">' | sed '/\<iframe/!d;s/.*src="//g;s/?.*//g') $(echo "$file" | sed '/drawMediaRaiTV/!d;s/.*http/http/g;s/'"'"'.*//g')"; file="$(wget -Q 50000000 -qO- $urls)"; }
+   echo "$file" | grep -q videoURL || { 
+    urls="http://www.rai.it/dl/RaiTV/programmi/media/"$(echo "$file" | sed '/content="ContentItem/!d;s/.*content="//g;s/".*//g')".html http://www.rai.tv$(echo "$file" | grep -A1 '<div id="idFramePlayer">' | sed '/\<iframe/!d;s/.*src="//g;s/?.*//g') $(echo "$file" | sed '/drawMediaRaiTV/!d;s/.*http/http/g;s/'"'"'.*//g')"
+    file="$(wget -Q 50000000 -qO- $urls)"
+   }
   }
   # read and declare videoURL and videoTitolo variables from javascript in page
 
@@ -367,7 +373,10 @@ $u"
 
  }
 
-
+ # raplay.it function
+ raiplay() {
+  links=$(echo "$file" | sed '/data-video-url=/!d;s/.*data-video-url="//g;s/".*//g')
+ }
  # Rai replay function
 
  replay() {
