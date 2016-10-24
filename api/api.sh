@@ -504,7 +504,7 @@ ${base//$t\.mp4/$i\.mp4}"; tbase="$(echo "$tbase" | grep -Ev "_([0-9]{3,4})_([0-
 
  common() {
   # Store the page in a variable
-  page="$(wget -Q 50000000 -q -O - "$1")"
+  page="$(wget -Q 10000000 -q -O - "$1")"
 
   json="$(youtube-dl -J "$1" | ./JSON.sh -s)"
   videoTitolo=$(echo "$json" | sed '/\["title"\]/!d;s/.*\t"//g;s/".*//g')
