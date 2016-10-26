@@ -19,6 +19,7 @@ if ($param == 'websites') {
 } elseif ($param == 'allwebsites') {
     $yt = shell_exec('youtube-dl --list-extractors');
     echo "rai.it
+raiplay.it
 video.mediaset.it
 wittytv.it
 la7.it

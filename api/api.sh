@@ -24,7 +24,8 @@ api() {
  urltype="$(curl -w "%{url_effective}\n" -L -s -I -S "$dl" -o /dev/null | sed 's/^HTTP:\/\//http:\/\//g')"
  
  
- echo "$urltype" | grep -qE '.*rai.it/.*|.*rai.tv/.*|.*rainews.it/.*|.*raiplay.it/.*'  && ptype=rai
+ echo "$urltype" | grep -qE '.*rai.it/.*|.*rai.tv/.*|.*rainews.it/.*'  && ptype=rai
+ echo "$urltype" | grep -qE '.*raiplay.it/.*'  && ptype=rai_play
 # grep -qE 'http://www.*.rai..*/dl/RaiTV/programmi/media/.*|http://www.*.rai..*/dl/RaiTV/tematiche/.*|http://www.*.rai..*/ dl/.*PublishingBlock-.*|http://www.*.rai..*/dl/replaytv/replaytv.html.*|http://.*.rai.it/.*|http://www.rainews.it/dl/rainews/.*|https://www.*.rai..*/dl/ RaiTV/programmi/media/.*|https://www.*.rai..*/dl/RaiTV/tematiche/.*|https://www.*.rai..*/dl/.*PublishingBlock-.*|https://www.*.rai..*/dl/ replaytv/replaytv.html.*|https://.*.rai.it/.*|https://www.rainews.it/dl/rainews/.*' && ptype=rai
  
  
@@ -95,7 +96,7 @@ $u"
  formatoutput() {
 
   case $ptype in
-   rai)
+   rai*)
     two="$(echo "$unformatted" | grep '.*_250.mp4')"
     four="$(echo "$unformatted" | grep '.*_400.mp4')"
     six="$(echo "$unformatted" | grep '.*_600.mp4')"
@@ -233,8 +234,6 @@ $u"
   file=$(wget "$saferai" -qQ 50000000 -O -)
 
   # Rai replay or normal rai website choice
-  links="$(echo "$links" | sed '/^\s*$/d')"
-  [ "$links" = "" ] && raiplay "$saferai"
   echo "$1" | grep -q 'http://www.*.rai..*/dl/replaytv/replaytv.html.*' && replay "$saferai" || rai_normal "$saferai"
   links="$videoURL_M3U8 $videoURL_MP4 $videoURL_H264 $videoURL_WMV $videoURL $replay"
   links="$(echo "$links" | sed '/^\s*$/d')"
@@ -270,8 +269,14 @@ $u"
  }
 
  # raplay.it function
- raiplay() {
+ rai_play() {
+  saferai="$1"
+  # Store the page in a variable
+  file=$(wget "$saferai" -qQ 50000000 -O -)
   links=$(echo "$file" | sed '/data-video-url=/!d;s/.*data-video-url="//g;s/".*//g')
+  links="$(echo "$links" | sed '/^\s*$/d')"
+  videoTitolo=$(echo "$file" |sed '/<title>/!d;s/^.*<title>//;s/<\/title>.*//g;s/^ //' | head -1)
+  relinker_rai "$links"
  }
  # Rai replay function
 
