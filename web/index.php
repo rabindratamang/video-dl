@@ -202,16 +202,17 @@ if (isset($_GET['url'])) {
                         <span class="name">Download videos!</span>
 
                         <hr class="star-light">
-                        <span class="skills giallo" id="description">Download videos from <a href="http://youtube.com" target="_blank">YouTube</a>, <a href="http://rai.tv" target="_blank">Rai</a>, <a href="http://www.rai.tv/dl/replaytv/replaytv.html#" target="_blank">Rai Replay</a>, <a href="http://video.mediaset.it" target="_blank">Video Mediaset</a>, <a href="http://la7.it" target="_blank">La7</a>, <a href="http://wittytv.it" target="_blank">Witty TV</a>, <a href="http://dplay.com" target="_blank">Dplay</a> <a href="#support" class="portfolio-link" data-toggle="modal">and lots of other websites</a>!<br>
+                        <div class="skills giallo" id="description">Download videos from <a href="http://youtube.com" target="_blank">YouTube</a>, <a href="http://rai.tv" target="_blank">Rai</a>, <a href="http://www.rai.tv/dl/replaytv/replaytv.html#" target="_blank">Rai Replay</a>, <a href="http://video.mediaset.it" target="_blank">Video Mediaset</a>, <a href="http://la7.it" target="_blank">La7</a>, <a href="http://wittytv.it" target="_blank">Witty TV</a>, <a href="http://dplay.com" target="_blank">Dplay</a> <a href="#support" class="portfolio-link" data-toggle="modal">and lots of other websites</a>!<br>
                         Also, do check out my other projects: 
                         <ul>
                             <li><a href="https://pwrtelegram.xyz" target="_blank">pwrtelegram, a boosted version of the Telegram bot API</a></li>
                             <li><a href="https://daniil.it/PHPStruct/" target="_blank">PHPStruct, a PHP implementation of Python's struct module</a></li>
                             <li><a href="https://github.com/danog/MadelineProto/" target="_blank">MadelineProto, a PHP implementation of telegram&apos;s mtproto</a></li>
                             <li><a href="https://daniil.it/#bots" target="_blank">my telegram bots</a></li>
-                            <li><a href="https://daniil.it" target="_blank">and many more!</a></li>
+                            <li><a href="https://daniil.it/TelegramCheats/" target="_blank">cheat engine for telegram games</a></li>
+                            <li><a href="https://daniil.it" target="_blank">and much more!</a></li>
                         </ul>
-                        Paste the URL of the video:<BR></span>
+                        Paste the URL of the video:<BR></div>
 
                         <br>
                         <br>
@@ -242,7 +243,7 @@ if (isset($_GET['url'])) {
                             (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
                         <span class="skills giallo" id="incorporation">You can incorporate this video download script in your website! Just follow <A href="//daniil.it/video-dl#incorporation" target="_blank">these instructions! </A></span>
-                        <span class="skills giallo"><br>Component statuses: <a href="https://status.daniil.it"><img src="//status.daniil.it/component/12/shield" class="img-centered img-responsive"><img src="//status.daniil.it/component/16/shield" class="img-centered img-responsive"><img src="//status.daniil.it/component/19/shield" class="img-centered img-responsive"><img src="//status.daniil.it/component/15/shield" class="img-centered img-responsive"></a></span>
+                        <span class="skills giallo"><br>Component statuses: <a href="https://status.daniil.it"><img src="//status.daniil.it/component/12/shield" alt="" class="img-centered img-responsive"><img src="//status.daniil.it/component/16/shield" alt="" class="img-centered img-responsive"><img src="//status.daniil.it/component/19/shield" alt="" class="img-centered img-responsive"><img src="//status.daniil.it/component/15/shield" alt="" class="img-centered img-responsive"></a></span>
                     </div>
                 </div>
             </div>
