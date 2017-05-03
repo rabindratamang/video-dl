@@ -444,7 +444,7 @@ ${base//$t\.mp4/$i\.mp4}"; tbase="$(echo "$tbase" | grep -Ev "_([0-9]{3,4})_([0-
   }
 
   # Get the video URLs using the video id
-  unformatted="$(wget "http://cdnselector.xuniplay.fdnames.com/GetCDN.aspx?streamid=$id" -O - -q -U="" | sed 's/</\
+  unformatted="$(wget "http://cdnsel01.mediaset.net/GetCdn.aspx?streamid=$id" -O - -q -U="" | sed 's/</\
 /g' | grep http | sed 's/.*http/http/g;s/\".*//g')"
 
   formatoutput
