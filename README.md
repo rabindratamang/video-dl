@@ -4,6 +4,7 @@ Video download project.
 [![Build Status](https://travis-ci.org/danog/video-dl.svg?branch=master)](https://travis-ci.org/danog/video-dl)
 [![npm version](https://badge.fury.io/js/video-dl.svg)](https://npmjs.org/package/video-dl)
 [![API Status](http://status.daniil.it/component/12/shield)](https://api.daniil.it)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdanog%2Fvideo-dl.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdanog%2Fvideo-dl?ref=badge_shield)
 
 [![Rank and dls](https://nodei.co/npm/video-dl.png?downloads=true&downloadRank=true&stars=true)](https://npmjs.org/package/video-dl)
 
@@ -467,3 +468,7 @@ Enjoy!
 
 [Daniil Gentili](http://daniil.it)
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdanog%2Fvideo-dl.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdanog%2Fvideo-dl?ref=badge_large)
