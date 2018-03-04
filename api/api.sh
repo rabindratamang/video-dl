@@ -509,8 +509,6 @@ ${base//$t\.mp4/$i\.mp4}"; tbase="$(echo "$tbase" | grep -Ev "_([0-9]{3,4})_([0-
 
  common() {
   # Store the page in a variable
-  page="$(wget -Q 10000000 -q -O - "$1")"
-
   json="$(youtube-dl -J "$1" | ./JSON.sh -s)"
   videoTitolo=$(echo "$json" | sed '/\["title"\]/!d;s/.*\t"//g;s/".*//g')
   urls="$(echo "$json" | sed '/\["formats",.*,"url"\]\|\["url"\]\|\["entries",.*,"url"\]/!d;s/.*\t"//g;s/".*//g')"
@@ -538,12 +536,14 @@ $format $info $a"
   done <<< "$urls"
   n=
   final="$(echo "$final" | awk '!x[$0]++')"
-  [ "$videoTitolo" = "" ] && videoTitolo=$(echo "$page" | tr "\n" " " | sed 's/<\/title>.*//;s/.*>//g;s/^ //')
   formats="$final"
+  [ "$videoTitolo" = "" ] && videoTitolo="$1"
   # Get the title
   title="${videoTitolo//[^a-zA-Z0-9 ]/}"
   title=${title// /_}
   [ "$formats" = "" ] && {
+   page="$(wget -Q 100 -q -O - "$1")"
+   [ "$videoTitolo" = "" ] && videoTitolo=$(echo "$page" | tr "\n" " " | sed 's/<\/title>.*//;s/.*>//g;s/^ //')
    base="$(echo "$json" | sed 's/\"/\
 /g' | egrep '\.mp4|\.mkv|\.flv|\.f4v|\.wmv|\.mov|\.3gp|\.avi|\.m4v|\.mpg|\.mpe|\.mpeg'  | awk '!x[$0]++')"
    checkurl
