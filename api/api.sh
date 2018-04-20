@@ -438,13 +438,12 @@ ${base//$t\.mp4/$i\.mp4}"; tbase="$(echo "$tbase" | grep -Ev "_([0-9]{3,4})_([0-
    videoTitolo=$(echo "$page" | sed '/[<]meta content=\".*\" property=\".*title\"\/[>]/!d;s/\" property=\".*title\".*//g;s/.*\<meta content\=\"//;s/\".*//g')
 
   } || {
-   $(echo "$page" | grep "var videoMetadataId")
-   id="$videoMetadataId"
+   id=$(echo "$page" | sed '/data-codf="/!d;s/.*data-codf="//g;s/".*//g')
    videoTitolo=$(echo "$page" | sed '/[<]meta content=\".*\" property=\".*title\"\/[>]/!d;s/\" property=\".*title\".*//g;s/.*\<meta content\=\"//;s/\".*//g')
   }
 
   # Get the video URLs using the video id
-  unformatted="$(wget "http://cdnsel01.mediaset.net/GetCdn.aspx?streamid=$id" -O - -q -U="" | sed 's/</\
+  unformatted="$(wget "http://cdnsel01.mediaset.net/GetCdn2018.aspx?streamid=$id" -O - -q -U="" | sed 's/</\
 /g' | grep http | sed 's/.*http/http/g;s/\".*//g')"
 
   formatoutput
