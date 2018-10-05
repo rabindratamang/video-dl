@@ -29,7 +29,7 @@ api() {
 # grep -qE 'http://www.*.rai..*/dl/RaiTV/programmi/media/.*|http://www.*.rai..*/dl/RaiTV/tematiche/.*|http://www.*.rai..*/ dl/.*PublishingBlock-.*|http://www.*.rai..*/dl/replaytv/replaytv.html.*|http://.*.rai.it/.*|http://www.rainews.it/dl/rainews/.*|https://www.*.rai..*/dl/ RaiTV/programmi/media/.*|https://www.*.rai..*/dl/RaiTV/tematiche/.*|https://www.*.rai..*/dl/.*PublishingBlock-.*|https://www.*.rai..*/dl/ replaytv/replaytv.html.*|https://.*.rai.it/.*|https://www.rainews.it/dl/rainews/.*' && ptype=rai
  
  
- echo "$urltype" | grep -qE '.*mediaset.it/.*|http://www.video.mediaset.it/player/playerIFrame.*|https://www.video.mediaset.it/video/.*|https://www.video.mediaset.it/player/playerIFrame.*|tgcom24.mediaset.it/video/.*|http://mediaset.it/.*|https://mediaset.it/.*' && ptype=mediaset
+ echo "$urltype" | grep -qE '.*mediaset.it/.*|https://www.mediasetplay.mediaset.it/video.*|http://www.video.mediaset.it/player/playerIFrame.*|https://www.video.mediaset.it/video/.*|https://www.video.mediaset.it/player/playerIFrame.*|tgcom24.mediaset.it/video/.*|http://mediaset.it/.*|https://mediaset.it/.*' && ptype=mediaset
  
  echo "$urltype" | grep -qE 'http://.*wittytv.it/.*|https://.*wittytv.it/.*' && ptype=mediaset && witty=y
  
@@ -426,9 +426,7 @@ ${base//$t\.mp4/$i\.mp4}"; tbase="$(echo "$tbase" | grep -Ev "_([0-9]{3,4})_([0-
 
 
  mediaset() {
-  # Store the page in a variable
-  page=$(wget "$1" -Q 50000000 -q -O -)
-
+  page=$(wget "$1" -qQ 50000 -O -)
   # Witty tv recongition
   [ "$witty" = "y" ] && {
    # Get the video id
@@ -437,14 +435,19 @@ ${base//$t\.mp4/$i\.mp4}"; tbase="$(echo "$tbase" | grep -Ev "_([0-9]{3,4})_([0-
    # Get the title
    videoTitolo=$(echo "$page" | sed '/[<]meta content=\".*\" property=\".*title\"\/[>]/!d;s/\" property=\".*title\".*//g;s/.*\<meta content\=\"//;s/\".*//g')
 
-  } || {
-   id=$(echo "$page" | sed '/data-codf="/!d;s/.*data-codf="//g;s/".*//g')
-   videoTitolo=$(echo "$page" | sed '/[<]meta content=\".*\" property=\".*title\"\/[>]/!d;s/\" property=\".*title\".*//g;s/.*\<meta content\=\"//;s/\".*//g')
-  }
-
   # Get the video URLs using the video id
   unformatted="$(wget "http://cdnsel01.mediaset.net/GetCdn2018.aspx?streamid=$id" -O - -q -U="" | sed 's/</\
 /g' | grep http | sed 's/.*http/http/g;s/\".*//g')"
+
+  } || {
+   # Get the page ID
+   id=$(echo "$1" | sed 's/.*_//g')
+
+   videoTitolo=$(echo "$page" | sed '/[<]title data-react-helmet=\"true\"[>].*[<]\/title[>]/!d;s/.*[<]title data-react-helmet=\"true\"[>]//g;s/[<]\/title[>].*//')
+
+   link="$(wget "https://feed.entertainment.tv.theplatform.eu/f/PR1GhC/mediaset-prod-all-programs/guid/-/$id" -O - -q -U="" | sed 's/.*"publicUrl":"//g;s/".*//g')?auto=true&tracking=true&balance=true&assetTypes=HD,HBBTV:SD,HBBTV:HD,browser:SD,browser:SD"
+   unformatted="$(curl -w "%{url_effective}\n" -H "User-agent: " -L -s -I -S "$link" -o /dev/null | sed 's/^HTTP:\/\//http:\/\//g')"
+  }
 
   formatoutput
 
