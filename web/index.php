@@ -243,7 +243,6 @@ if (isset($_GET['url'])) {
                             (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
                         <span class="skills giallo" id="incorporation">You can incorporate this video download script in your website! Just follow <A href="//daniil.it/video-dl#incorporation" target="_blank">these instructions! </A></span>
-                        <span class="skills giallo"><br>Component statuses: <a href="https://status.daniil.it"><img src="//status.daniil.it/component/12/shield" alt="" class="img-centered img-responsive"><img src="//status.daniil.it/component/16/shield" alt="" class="img-centered img-responsive"><img src="//status.daniil.it/component/19/shield" alt="" class="img-centered img-responsive"><img src="//status.daniil.it/component/15/shield" alt="" class="img-centered img-responsive"></a></span>
                     </div>
                 </div>
             </div>
